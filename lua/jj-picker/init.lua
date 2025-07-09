@@ -21,7 +21,8 @@ function M.status()
 					hl = "SnacksPickerGitStatusDeleted"
 				elseif state == "R" then
 					hl = "SnacksPickerGitStatusRenamed"
-					file = string.match(text, "{.-=>%s*(.-)}")
+					local path, filename = string.match(text, "^(.*){.-=>%s*(.-)}")
+          file = path .. filename
 				end
 
 				local diff = vim.fn.system("jj diff " .. file .. " --no-pager --stat --git")
