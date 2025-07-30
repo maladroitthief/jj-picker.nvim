@@ -3,7 +3,7 @@ local M = {}
 function M.status()
 	local function get_files()
 		local workspace_root = vim.fn.system("jj workspace root")
-		local status_raw = vim.fn.system("jj diff --no-pager --quiet --summary")
+		local status_raw = vim.fn.system("jj diff --no-pager --quiet --summary --color never")
 		local files = {}
 
 		for status in status_raw:gmatch("[^\r\n]+") do
@@ -25,7 +25,7 @@ function M.status()
           file = path .. filename
 				end
 
-				local diff = vim.fn.system("jj diff " .. file .. " --no-pager --stat --git")
+				local diff = vim.fn.system("jj diff " .. file .. " --no-pager --stat --git --color never")
 				table.insert(files, {
 					text = text,
 					file = file,
@@ -62,3 +62,4 @@ M.setup = function(config)
 end
 
 return M
+
